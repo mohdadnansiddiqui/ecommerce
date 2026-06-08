@@ -1,0 +1,20 @@
+<section class="app-page">
+  <header class="app-page-header">
+    <div>
+      <p class="app-eyebrow">Payment management</p>
+      <h1 class="app-title">Payment list</h1>
+      <p class="app-subtitle">Lookup payment history by order using payment-service.</p>
+    </div>
+    <a mat-stroked-button routerLink="/admin/payments/status">Status View</a>
+  </header>
+  <section class="app-panel">
+    <form class="app-panel-body lookup" [formGroup]="form" (ngSubmit)="load()">
+      <mat-form-field appearance="outline">
+        <mat-label>Order ID</mat-label>
+        <input matInput type="number" formControlName="orderId" />
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="submit">Load Payments</button>
+    </form>
+    <app-data-table [columns]="columns" [rows]="rows()" emptyTitle="Load an order to view payments" (rowSelected)="view($event)" />
+  </section>
+</section>

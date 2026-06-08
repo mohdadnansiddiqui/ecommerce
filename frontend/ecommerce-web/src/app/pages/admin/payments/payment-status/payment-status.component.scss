@@ -1,0 +1,33 @@
+.lookup {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.lookup mat-form-field {
+  max-width: 220px;
+}
+
+.status-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  background: var(--app-surface);
+  padding: 18px;
+}
+
+.status-card mat-icon {
+  color: var(--app-success);
+}
+
+.status-card strong {
+  display: block;
+  font-size: 24px;
+}
+
+.status-card span {
+  color: var(--app-muted);
+}

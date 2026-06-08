@@ -1,0 +1,33 @@
+.details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.details div {
+  display: grid;
+  gap: 4px;
+}
+
+.details span {
+  color: var(--app-muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.actions,
+.error-state {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.error-state {
+  color: var(--app-muted);
+}
+
+.error-state mat-icon {
+  color: var(--app-danger);
+}

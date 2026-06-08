@@ -1,0 +1,16 @@
+<section class="app-page">
+  @if (payment(); as item) {
+    <header>
+      <p class="app-eyebrow">Payment details</p>
+      <h1 class="app-title">Payment #{{ item.id }}</h1>
+      <p class="app-subtitle">Order {{ item.orderId }} · {{ item.paymentDate | date:'medium' }}</p>
+    </header>
+    <section class="app-grid app-grid-3">
+      <article class="app-panel"><div class="app-panel-body"><span>Amount</span><strong>{{ item.amount | currency:'INR' }}</strong></div></article>
+      <article class="app-panel"><div class="app-panel-body"><span>Method</span><strong>{{ item.paymentMethod }}</strong></div></article>
+      <article class="app-panel"><div class="app-panel-body"><span>Status</span><strong class="status-pill">{{ item.paymentStatus }}</strong></div></article>
+    </section>
+  } @else {
+    <app-loading-spinner label="Loading payment" />
+  }
+</section>

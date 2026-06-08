@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  sql:
+    init:
+      mode: never
+
+app:
+  jwt:
+    secret: ZWNvbW1lcmNlLW1pY3Jvc2VydmljZXMtamF2YS0yMS1zcHJpbmctYm9vdC0zLWp3dC1zaGFyZWQtc2VjcmV0LWtleS0yMDI2
+    access-token-minutes: 30
+    refresh-token-days: 7
+  cors:
+    allowed-origins: http://localhost:4200

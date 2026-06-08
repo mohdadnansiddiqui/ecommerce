@@ -1,0 +1,42 @@
+<section class="app-page">
+  <header class="app-page-header">
+    <div>
+      <p class="app-eyebrow">Product details</p>
+      <h1 class="app-title">{{ product()?.name || 'Loading product' }}</h1>
+      <p class="app-subtitle">Inspect pricing, stock posture, category, and media for a catalog item.</p>
+    </div>
+    <div class="actions">
+      <a mat-stroked-button routerLink="/admin/products">
+        <mat-icon>arrow_back</mat-icon>
+        Products
+      </a>
+      <button mat-flat-button color="primary" type="button" (click)="edit()" [disabled]="!product()">
+        <mat-icon>edit</mat-icon>
+        Update Product
+      </button>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <app-loading-spinner label="Loading product" />
+  } @else if (product(); as item) {
+    <section class="details-grid">
+      <article class="app-panel media-panel">
+        <img [src]="item.imageUrl || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'" alt="" />
+      </article>
+      <article class="app-panel">
+        <div class="app-panel-body details">
+          <span class="status-pill">{{ item.category }}</span>
+          <h2>{{ item.name }}</h2>
+          <p>{{ item.description || 'No description supplied.' }}</p>
+          <dl>
+            <div><dt>Price</dt><dd>{{ item.price | currency:'INR' }}</dd></div>
+            <div><dt>Stock</dt><dd>{{ item.stockQuantity }}</dd></div>
+            <div><dt>Created</dt><dd>{{ item.createdAt | date:'medium' }}</dd></div>
+            <div><dt>Product ID</dt><dd>{{ item.id }}</dd></div>
+          </dl>
+        </div>
+      </article>
+    </section>
+  }
+</section>

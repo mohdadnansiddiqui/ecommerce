@@ -1,0 +1,14 @@
+.review-list,
+.review-card {
+  display: grid;
+  gap: 12px;
+}
+
+.review-card p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.review-card small {
+  color: var(--app-muted);
+}

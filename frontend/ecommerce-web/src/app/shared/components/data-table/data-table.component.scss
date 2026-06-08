@@ -1,0 +1,69 @@
+.table-shell {
+  overflow: hidden;
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  background: var(--app-surface);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+th {
+  color: #475467;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+td,
+th {
+  white-space: nowrap;
+}
+
+.actions-cell {
+  width: 56px;
+  text-align: right;
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #b54708;
+  font-weight: 700;
+}
+
+.rating mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+
+.table-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #eef2f6;
+}
+
+.empty {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  min-height: 220px;
+  color: var(--app-muted);
+  text-align: center;
+}
+
+.empty mat-icon {
+  width: 44px;
+  height: 44px;
+  color: #98a2b3;
+  font-size: 44px;
+}
+
+.empty strong {
+  color: var(--app-text);
+}

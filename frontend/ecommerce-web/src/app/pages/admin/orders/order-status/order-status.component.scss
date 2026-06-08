@@ -1,0 +1,19 @@
+.workflow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.workflow span {
+  border: 1px solid var(--app-border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: var(--app-muted);
+  background: var(--app-surface);
+}
+
+.workflow span.available {
+  color: var(--app-primary-dark);
+  border-color: #b2ccff;
+  background: #eff4ff;
+}

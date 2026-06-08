@@ -1,0 +1,50 @@
+.dialog-grid {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
+  gap: 18px;
+  width: min(680px, 100%);
+}
+
+img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--app-surface-muted);
+}
+
+.details {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+p {
+  margin: 0;
+  color: var(--app-muted);
+}
+
+dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+dt {
+  color: var(--app-muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+dd {
+  margin: 4px 0 0;
+  font-weight: 800;
+}
+
+@media (max-width: 620px) {
+  .dialog-grid {
+    grid-template-columns: 1fr;
+  }
+}

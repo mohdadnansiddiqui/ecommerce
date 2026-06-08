@@ -1,0 +1,28 @@
+<section class="app-page">
+  <header>
+    <p class="app-eyebrow">Order status update</p>
+    <h1 class="app-title">Workflow status for order #{{ orderId }}</h1>
+    <p class="app-subtitle">The UI shows the full enterprise workflow; the current backend exposes cancellation as the only status mutation.</p>
+  </header>
+  <form class="app-panel" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="app-panel-body app-form-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          @for (status of displayStatuses; track status) {
+            <mat-option [value]="status">{{ status }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="submit">Apply Status</button>
+    </div>
+  </form>
+  <div class="workflow">
+    @for (status of displayStatuses; track status) {
+      <span [class.available]="backendStatuses.includes(status)">{{ status }}</span>
+    }
+  </div>
+  @if (result(); as order) {
+    <p class="status-pill danger">Order is now {{ order.orderStatus }}</p>
+  }
+</section>

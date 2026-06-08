@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>{{ product.name }}</h2>
+<mat-dialog-content>
+  <section class="dialog-grid">
+    <img
+      [src]="product.imageUrl || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'"
+      alt="" />
+    <div class="details">
+      <span class="status-pill">{{ product.category }}</span>
+      <p>{{ product.description || 'No description supplied for this product.' }}</p>
+      <dl>
+        <div>
+          <dt>Price</dt>
+          <dd>{{ product.price | currency:'INR':'symbol':'1.0-2' }}</dd>
+        </div>
+        <div>
+          <dt>Stock</dt>
+          <dd>{{ product.stockQuantity }}</dd>
+        </div>
+        <div>
+          <dt>Created</dt>
+          <dd>{{ product.createdAt | date:'medium' }}</dd>
+        </div>
+        <div>
+          <dt>Product ID</dt>
+          <dd>{{ product.id }}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="close()">Close</button>
+  <a mat-flat-button color="primary" [routerLink]="['/admin/products', product.id, 'edit']" (click)="close()">
+    <mat-icon>edit</mat-icon>
+    Edit Product
+  </a>
+</mat-dialog-actions>

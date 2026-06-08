@@ -1,0 +1,14 @@
+<section class="app-page">
+  <header class="app-page-header">
+    <div>
+      <p class="app-eyebrow">Inventory management</p>
+      <h1 class="app-title">Inventory list</h1>
+      <p class="app-subtitle">Inventory records loaded through product stock endpoints.</p>
+    </div>
+    <div class="actions">
+      <a mat-stroked-button routerLink="/admin/inventory/low-stock">Low Stock Dashboard</a>
+      <a mat-flat-button color="primary" routerLink="/admin/inventory/stock">Update Stock</a>
+    </div>
+  </header>
+  <app-data-table [columns]="columns" [rows]="rows()" [loading]="loading()" [showViewAction]="false" emptyTitle="No inventory records loaded" />
+</section>

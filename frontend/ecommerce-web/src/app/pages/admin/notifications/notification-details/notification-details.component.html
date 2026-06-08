@@ -1,0 +1,17 @@
+<section class="app-page">
+  @if (notification(); as item) {
+    <header>
+      <p class="app-eyebrow">Notification details</p>
+      <h1 class="app-title">Notification #{{ item.id }}</h1>
+      <p class="app-subtitle">Customer {{ item.customerId }} · {{ item.createdAt | date:'medium' }}</p>
+    </header>
+    <article class="app-panel">
+      <div class="app-panel-body detail">
+        <span class="status-pill">{{ item.notificationType }}</span>
+        <p>{{ item.message }}</p>
+      </div>
+    </article>
+  } @else {
+    <app-loading-spinner label="Loading notification" />
+  }
+</section>

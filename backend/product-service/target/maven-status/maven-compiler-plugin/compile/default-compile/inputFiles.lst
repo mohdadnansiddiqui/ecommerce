@@ -1,0 +1,17 @@
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\application\dto\ProductRequest.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\application\dto\ProductResponse.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\application\mapper\ProductMapper.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\application\service\JwtService.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\application\service\ProductService.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\config\JwtProperties.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\config\OpenApiConfig.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\config\SecurityConfig.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\domain\model\Product.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\domain\repository\ProductRepository.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\infrastructure\security\JwtAuthenticationFilter.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\interfaces\rest\ProductController.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\ProductServiceApplication.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\shared\exception\ApiError.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\shared\exception\BadRequestException.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\shared\exception\GlobalExceptionHandler.java
+C:\Users\mdadn\OneDrive\Documents\ecom\backend\product-service\src\main\java\com\ecommerce\product\shared\exception\ResourceNotFoundException.java

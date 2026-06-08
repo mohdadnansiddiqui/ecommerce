@@ -1,0 +1,20 @@
+<section class="app-page">
+  @if (order(); as item) {
+    <header class="app-page-header">
+      <div>
+        <p class="app-eyebrow">Order details</p>
+        <h1 class="app-title">Order #{{ item.id }}</h1>
+        <p class="app-subtitle">Customer {{ item.customerId }} · {{ item.createdAt | date:'medium' }}</p>
+      </div>
+      <a mat-flat-button color="primary" [routerLink]="['/admin/orders', item.id, 'status']">Update Status</a>
+    </header>
+    <section class="app-grid app-grid-3">
+      <article class="app-panel"><div class="app-panel-body"><span class="app-muted">Status</span><h2>{{ item.orderStatus }}</h2></div></article>
+      <article class="app-panel"><div class="app-panel-body"><span class="app-muted">Total</span><h2>{{ item.totalAmount | currency:'INR' }}</h2></div></article>
+      <article class="app-panel"><div class="app-panel-body"><span class="app-muted">Items</span><h2>{{ item.items.length }}</h2></div></article>
+    </section>
+    <app-data-table [columns]="columns" [rows]="rows(item)" [showViewAction]="false" />
+  } @else {
+    <app-loading-spinner label="Loading order" />
+  }
+</section>

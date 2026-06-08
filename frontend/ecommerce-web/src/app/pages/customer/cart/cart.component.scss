@@ -1,0 +1,10 @@
+.lookup {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.lookup mat-form-field {
+  max-width: 220px;
+}

@@ -1,0 +1,10 @@
+<section class="app-page">
+  <header class="app-page-header">
+    <div>
+      <p class="app-eyebrow">Categories</p>
+      <h1 class="app-title">Catalog category view</h1>
+      <p class="app-subtitle">Derived from existing product-service category fields.</p>
+    </div>
+  </header>
+  <app-data-table [columns]="columns" [rows]="rows()" [loading]="loading()" [showViewAction]="false" emptyTitle="No categories available" />
+</section>

@@ -1,0 +1,36 @@
+<header class="topbar">
+  <button mat-icon-button type="button" aria-label="Toggle menu" (click)="menuClicked.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <div class="topbar-title">
+    <strong>{{ title }}</strong>
+    <span>Operations console</span>
+  </div>
+
+  <div class="topbar-actions">
+    <a mat-stroked-button [routerLink]="portalLink">
+      <mat-icon>sync_alt</mat-icon>
+      {{ portalLabel }}
+    </a>
+    <button mat-icon-button type="button" matBadge="3" matBadgeColor="warn" aria-label="Notifications">
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-button type="button" [matMenuTriggerFor]="profileMenu" class="profile-button">
+      <span class="avatar">{{ auth.currentUser()?.username?.slice(0, 1) || 'U' }}</span>
+      <span>{{ auth.currentUser()?.username || 'User' }}</span>
+      <mat-icon>expand_more</mat-icon>
+    </button>
+  </div>
+
+  <mat-menu #profileMenu="matMenu">
+    <a mat-menu-item routerLink="/portal/profile">
+      <mat-icon>person</mat-icon>
+      Profile
+    </a>
+    <button mat-menu-item type="button" (click)="auth.logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </mat-menu>
+</header>

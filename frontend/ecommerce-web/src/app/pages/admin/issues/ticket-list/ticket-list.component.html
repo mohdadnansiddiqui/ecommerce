@@ -1,0 +1,52 @@
+<section class="app-page">
+  <header class="app-page-header">
+    <div>
+      <p class="app-eyebrow">Issue management</p>
+      <h1 class="app-title">Ticket list</h1>
+      <p class="app-subtitle">Track support issue records, filter triage queues, and open each ticket workflow.</p>
+    </div>
+    <a mat-flat-button color="primary" routerLink="/admin/issues/create">
+      <mat-icon>add</mat-icon>
+      Create Ticket
+    </a>
+  </header>
+
+  <section class="app-panel">
+    <div class="app-panel-body toolbar">
+      <app-search-bar placeholder="Search tickets, customers, status, priority" (searched)="search($event)" />
+
+      <div class="filters">
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select [value]="statusFilter()" (selectionChange)="filterStatus($event.value)">
+            <mat-option value="all">All statuses</mat-option>
+            @for (status of statuses; track status) {
+              <mat-option [value]="status">{{ status }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Priority</mat-label>
+          <mat-select [value]="priorityFilter()" (selectionChange)="filterPriority($event.value)">
+            <mat-option value="all">All priorities</mat-option>
+            @for (priority of priorities; track priority) {
+              <mat-option [value]="priority">{{ priority }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <app-data-table
+      [columns]="columns"
+      [rows]="pagedRows()"
+      emptyTitle="No tickets found"
+      emptyMessage="Try another search, status, or priority filter."
+      (rowSelected)="view($event)" />
+
+    <div class="app-panel-body">
+      <app-pagination [page]="page()" [pageSize]="pageSize" [total]="filteredTickets().length" (pageChange)="page.set($event)" />
+    </div>
+  </section>
+</section>

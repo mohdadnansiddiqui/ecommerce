@@ -1,0 +1,21 @@
+.report-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.report-list article {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.report-list mat-icon {
+  color: var(--app-primary);
+}
+
+.report-list span {
+  color: var(--app-muted);
+}

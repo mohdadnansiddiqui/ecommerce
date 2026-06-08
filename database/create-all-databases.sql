@@ -1,0 +1,9 @@
+CREATE DATABASE ecommerce_auth;
+CREATE DATABASE ecommerce_customer;
+CREATE DATABASE ecommerce_product;
+CREATE DATABASE ecommerce_cart;
+CREATE DATABASE ecommerce_order;
+CREATE DATABASE ecommerce_payment;
+CREATE DATABASE ecommerce_inventory;
+CREATE DATABASE ecommerce_notification;
+CREATE DATABASE ecommerce_review;

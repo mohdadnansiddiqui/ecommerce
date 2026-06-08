@@ -1,0 +1,15 @@
+<mat-sidenav-container class="layout-shell">
+  <mat-sidenav class="layout-sidebar" mode="side" [opened]="opened()">
+    <app-sidebar title="CommerceOS" subtitle="Admin Command Center" logo="OS" [items]="nav" />
+  </mat-sidenav>
+
+  <mat-sidenav-content class="layout-content">
+    <app-top-navbar title="Admin Portal" portalLink="/portal/home" portalLabel="Customer Portal" (menuClicked)="toggleMenu()" />
+    <main class="content-frame">
+      <app-breadcrumb />
+      <router-outlet />
+      <app-footer />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<app-toast-notifications />

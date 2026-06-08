@@ -1,0 +1,12 @@
+<form class="search" (ngSubmit)="submit()">
+  <mat-form-field appearance="outline">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput [placeholder]="placeholder" [formControl]="query" />
+    @if (query.value) {
+      <button mat-icon-button matSuffix type="button" aria-label="Clear search" (click)="clear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </mat-form-field>
+  <button mat-flat-button color="primary" type="submit">Search</button>
+</form>

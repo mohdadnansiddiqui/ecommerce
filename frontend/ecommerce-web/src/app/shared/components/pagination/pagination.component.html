@@ -1,0 +1,11 @@
+<div class="pagination">
+  <span>Showing {{ start }}-{{ end }} of {{ total }}</span>
+  <div>
+    <button mat-icon-button type="button" aria-label="Previous page" [disabled]="!hasPrevious" (click)="pageChange.emit(page - 1)">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <button mat-icon-button type="button" aria-label="Next page" [disabled]="!hasNext" (click)="pageChange.emit(page + 1)">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+</div>

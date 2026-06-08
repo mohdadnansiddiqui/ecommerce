@@ -1,0 +1,7 @@
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a routerLink="/">Commerce</a>
+  @for (crumb of crumbs(); track crumb.url) {
+    <mat-icon>chevron_right</mat-icon>
+    <a [routerLink]="crumb.url">{{ crumb.label }}</a>
+  }
+</nav>

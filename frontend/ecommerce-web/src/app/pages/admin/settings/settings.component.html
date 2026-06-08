@@ -1,0 +1,17 @@
+<section class="app-page">
+  <header>
+    <p class="app-eyebrow">Settings</p>
+    <h1 class="app-title">Portal settings</h1>
+    <p class="app-subtitle">Configuration overview for the Angular portal. Backend settings remain unchanged.</p>
+  </header>
+  <section class="settings-grid">
+    @for (item of settings; track item.label) {
+      <article class="app-panel">
+        <div class="app-panel-body">
+          <span>{{ item.label }}</span>
+          <strong>{{ item.value }}</strong>
+        </div>
+      </article>
+    }
+  </section>
+</section>

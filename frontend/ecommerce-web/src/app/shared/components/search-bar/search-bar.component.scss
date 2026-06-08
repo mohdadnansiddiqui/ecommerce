@@ -1,0 +1,16 @@
+.search {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: min(100%, 520px);
+}
+
+.search mat-form-field {
+  flex: 1;
+}
+
+@media (max-width: 560px) {
+  .search {
+    width: 100%;
+  }
+}

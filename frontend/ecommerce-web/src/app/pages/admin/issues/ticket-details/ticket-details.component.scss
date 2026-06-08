@@ -1,0 +1,40 @@
+.actions,
+.section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.detail,
+.metric {
+  display: grid;
+  gap: 12px;
+}
+
+.metric span {
+  color: var(--app-muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.section-heading h2,
+p {
+  margin: 0;
+}
+
+.section-heading mat-form-field {
+  width: 220px;
+}
+
+p {
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .section-heading mat-form-field {
+    width: 100%;
+  }
+}

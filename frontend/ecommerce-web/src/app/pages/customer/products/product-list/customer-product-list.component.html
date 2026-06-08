@@ -1,0 +1,25 @@
+<section class="app-page">
+  <header class="app-page-header">
+    <div>
+      <p class="app-eyebrow">Products</p>
+      <h1 class="app-title">Shop catalog</h1>
+      <p class="app-subtitle">Search and browse products from product-service.</p>
+    </div>
+    <app-search-bar placeholder="Search product catalog" (searched)="load($event)" />
+  </header>
+  <div class="product-grid">
+    @for (product of products(); track product.id) {
+      <a class="product-card" [routerLink]="['/portal/products', product.id]">
+        <img [src]="product.imageUrl || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'" alt="" />
+        <div>
+          <span class="status-pill">{{ product.category }}</span>
+          <strong>{{ product.name }}</strong>
+          <p>{{ product.description }}</p>
+          <em>{{ product.price | currency:'INR' }}</em>
+        </div>
+      </a>
+    } @empty {
+      <article class="app-panel"><div class="app-panel-body app-muted">No products found.</div></article>
+    }
+  </div>
+</section>

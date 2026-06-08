@@ -1,0 +1,42 @@
+<section class="app-page">
+  <header class="app-page-header">
+    <div>
+      <p class="app-eyebrow">Customer management</p>
+      <h1 class="app-title">Customers</h1>
+      <p class="app-subtitle">Search and inspect customer-service records across the commerce workspace.</p>
+    </div>
+    <button mat-stroked-button type="button" (click)="load()">
+      <mat-icon>refresh</mat-icon>
+      Refresh
+    </button>
+  </header>
+
+  <section class="app-panel">
+    <div class="app-panel-body toolbar">
+      <app-search-bar placeholder="Search customers, email, phone, address" (searched)="search($event)" />
+    </div>
+
+    @if (error() && !loading()) {
+      <div class="app-panel-body error-state">
+        <mat-icon>error_outline</mat-icon>
+        <div>
+          <strong>Customer data could not be loaded</strong>
+          <span>{{ error() }}</span>
+        </div>
+        <button mat-stroked-button type="button" (click)="load()">Retry</button>
+      </div>
+    } @else {
+      <app-data-table
+        [columns]="columns"
+        [rows]="pagedRows()"
+        [loading]="loading()"
+        emptyTitle="No customers found"
+        emptyMessage="Try another search or refresh customer data."
+        (rowSelected)="view($event)" />
+    }
+
+    <div class="app-panel-body">
+      <app-pagination [page]="page()" [pageSize]="pageSize" [total]="filteredCustomers().length" (pageChange)="page.set($event)" />
+    </div>
+  </section>
+</section>

@@ -1,0 +1,14 @@
+<section class="app-page">
+  <header class="app-page-header">
+    <div>
+      <p class="app-eyebrow">Issue management</p>
+      <h1 class="app-title">Ticket dashboard</h1>
+      <p class="app-subtitle">Frontend ticket operations module for support workflows; no new backend APIs are introduced.</p>
+    </div>
+    <div class="actions">
+      <a mat-stroked-button routerLink="/admin/issues/list">Ticket List</a>
+      <a mat-flat-button color="primary" routerLink="/admin/issues/create">Create Ticket</a>
+    </div>
+  </header>
+  <app-dashboard-cards [cards]="cards()" />
+</section>

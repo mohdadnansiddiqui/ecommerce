@@ -1,0 +1,25 @@
+.lookup {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.lookup mat-form-field {
+  max-width: 220px;
+}
+
+.moderation-list,
+.review-card {
+  display: grid;
+  gap: 12px;
+}
+
+.review-card p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.review-card small {
+  color: var(--app-muted);
+}

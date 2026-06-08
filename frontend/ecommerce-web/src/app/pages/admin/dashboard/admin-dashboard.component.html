@@ -1,0 +1,164 @@
+<section class="app-page">
+  <header class="app-page-header">
+    <div>
+      <p class="app-eyebrow">Admin dashboard</p>
+      <h1 class="app-title">Commerce operations overview</h1>
+      <p class="app-subtitle">A consolidated view across catalog, customers, orders, revenue signals, and inventory risk.</p>
+    </div>
+    <a mat-flat-button color="primary" routerLink="/admin/products/create">
+      <mat-icon>add</mat-icon>
+      New Product
+    </a>
+  </header>
+
+  @if (loading()) {
+    <app-loading-spinner label="Loading dashboard" />
+  } @else {
+    <app-dashboard-cards [cards]="cards()" />
+
+    <section class="chart-grid">
+      <article class="app-panel chart-panel">
+        <div class="app-panel-body">
+          <h2>Revenue Trend</h2>
+          @for (item of revenueTrend(); track item.label) {
+            <div class="bar-row">
+              <span>{{ item.label }}</span>
+              <div><i [style.width.%]="barWidth(item.value, revenueTrend())"></i></div>
+              <strong>{{ item.value | currency:'INR':'symbol':'1.0-0' }}</strong>
+            </div>
+          }
+        </div>
+      </article>
+
+      <article class="app-panel chart-panel">
+        <div class="app-panel-body">
+          <h2>Orders Trend</h2>
+          @for (item of orderTrend(); track item.label) {
+            <div class="bar-row compact">
+              <span>{{ item.label }}</span>
+              <div><i [style.width.%]="barWidth(item.value, orderTrend())"></i></div>
+              <strong>{{ item.value }}</strong>
+            </div>
+          }
+        </div>
+      </article>
+
+      <article class="app-panel chart-panel">
+        <div class="app-panel-body">
+          <h2>Product Category Distribution</h2>
+          @if (categoryDistribution().length) {
+            @for (item of categoryDistribution(); track item.label) {
+              <div class="bar-row compact">
+                <span>{{ item.label }}</span>
+                <div><i [style.width.%]="barWidth(item.value, categoryDistribution())"></i></div>
+                <strong>{{ item.value }}</strong>
+              </div>
+            }
+          } @else {
+            <p class="app-muted">No category data available yet.</p>
+          }
+        </div>
+      </article>
+    </section>
+
+    <section class="dashboard-grid">
+      <article class="app-panel">
+        <div class="app-panel-body">
+          <div class="section-heading">
+            <h2>Recent Orders</h2>
+            <a mat-button routerLink="/admin/orders">View all</a>
+          </div>
+          @if (recentOrders().length) {
+            <div class="table-scroll">
+              <table mat-table [dataSource]="recentOrders()">
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef>Order</th>
+                  <td mat-cell *matCellDef="let order">#{{ order.id }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="customer">
+                  <th mat-header-cell *matHeaderCellDef>Customer</th>
+                  <td mat-cell *matCellDef="let order">{{ order.customerId }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="amount">
+                  <th mat-header-cell *matHeaderCellDef>Amount</th>
+                  <td mat-cell *matCellDef="let order">{{ order.totalAmount | currency:'INR':'symbol':'1.0-2' }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef>Status</th>
+                  <td mat-cell *matCellDef="let order">
+                    <span class="status-pill" [ngClass]="statusClass(order.orderStatus)">{{ order.orderStatus }}</span>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="createdAt">
+                  <th mat-header-cell *matHeaderCellDef>Created</th>
+                  <td mat-cell *matCellDef="let order">{{ order.createdAt | date:'mediumDate' }}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['id', 'customer', 'amount', 'status', 'createdAt']"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['id', 'customer', 'amount', 'status', 'createdAt']"></tr>
+              </table>
+            </div>
+          } @else {
+            <p class="app-muted">No recent orders were returned by the existing order-service endpoints.</p>
+          }
+        </div>
+      </article>
+
+      <aside class="side-stack">
+        <article class="app-panel">
+          <div class="app-panel-body">
+            <h2>Revenue Summary</h2>
+            <div class="summary-row">
+              <span>Confirmed revenue</span>
+              <strong>{{ paidRevenue() | currency:'INR':'symbol':'1.0-0' }}</strong>
+            </div>
+            <div class="summary-row">
+              <span>Pending revenue</span>
+              <strong>{{ pendingRevenue() | currency:'INR':'symbol':'1.0-0' }}</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="app-panel">
+          <div class="app-panel-body">
+            <h2>Quick Actions</h2>
+            <div class="quick-actions">
+              @for (action of quickActions; track action.route) {
+                <a mat-stroked-button [routerLink]="action.route">
+                  <mat-icon>{{ action.icon }}</mat-icon>
+                  {{ action.label }}
+                </a>
+              }
+            </div>
+          </div>
+        </article>
+      </aside>
+    </section>
+
+    <section class="app-panel">
+      <div class="app-panel-body">
+        <div class="section-heading">
+          <h2>Low Stock Watchlist</h2>
+          <a mat-button routerLink="/admin/inventory/low-stock">View low stock dashboard</a>
+        </div>
+        @if (lowStock().length) {
+          <div class="watchlist">
+            @for (product of lowStock(); track product.id) {
+              <article>
+                <strong>{{ product.name }}</strong>
+                <span>{{ product.category }}</span>
+                <em>{{ product.stockQuantity }} remaining</em>
+              </article>
+            }
+          </div>
+        } @else {
+          <p class="app-muted">No low stock products detected from the loaded catalog.</p>
+        }
+      </div>
+    </section>
+  }
+</section>

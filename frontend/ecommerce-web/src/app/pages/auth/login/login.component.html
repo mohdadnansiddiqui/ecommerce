@@ -1,0 +1,33 @@
+<form class="auth-form" [formGroup]="form" (ngSubmit)="submit()">
+  <div>
+    <p class="app-eyebrow">Welcome back</p>
+    <h2>Sign in to CommerceOS</h2>
+    <p class="app-muted">Use your existing auth-service credentials.</p>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Username or email</mat-label>
+    <input matInput formControlName="usernameOrEmail" autocomplete="username" />
+    <mat-icon matPrefix>person</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" autocomplete="current-password" />
+    <mat-icon matPrefix>lock</mat-icon>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" type="submit" [disabled]="loading()">
+    @if (loading()) {
+      <mat-icon>progress_activity</mat-icon>
+    } @else {
+      <mat-icon>login</mat-icon>
+    }
+    Sign in
+  </button>
+
+  <p class="switch">
+    New customer?
+    <a routerLink="/auth/register">Create an account</a>
+  </p>
+</form>

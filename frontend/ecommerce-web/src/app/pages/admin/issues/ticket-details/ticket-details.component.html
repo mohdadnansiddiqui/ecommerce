@@ -1,0 +1,66 @@
+<section class="app-page">
+  @if (ticket(); as item) {
+    <header class="app-page-header">
+      <div>
+        <p class="app-eyebrow">Ticket details</p>
+        <h1 class="app-title">{{ item.title }}</h1>
+        <p class="app-subtitle">{{ item.id }} - {{ item.customer }} - {{ item.createdDate | date:'medium' }}</p>
+      </div>
+      <div class="actions">
+        <a mat-stroked-button routerLink="/admin/issues">Back to List</a>
+        <a mat-flat-button color="primary" [routerLink]="['/admin/issues', item.id, 'edit']">Edit Ticket</a>
+      </div>
+    </header>
+
+    <section class="app-grid app-grid-3">
+      <article class="app-panel">
+        <div class="app-panel-body metric">
+          <span>Priority</span>
+          <strong class="status-pill" [ngClass]="statusClass(item.priority)">{{ item.priority }}</strong>
+        </div>
+      </article>
+      <article class="app-panel">
+        <div class="app-panel-body metric">
+          <span>Status</span>
+          <strong class="status-pill" [ngClass]="statusClass(item.status)">{{ item.status }}</strong>
+        </div>
+      </article>
+      <article class="app-panel">
+        <div class="app-panel-body metric">
+          <span>Created</span>
+          <strong>{{ item.createdDate | date:'mediumDate' }}</strong>
+        </div>
+      </article>
+    </section>
+
+    <article class="app-panel">
+      <div class="app-panel-body detail">
+        <div class="section-heading">
+          <div>
+            <h2>Issue Description</h2>
+            <span class="app-muted">Customer: {{ item.customer }}</span>
+          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select [value]="item.status" (selectionChange)="updateStatus($event.value)">
+              @for (status of statuses; track status) {
+                <mat-option [value]="status">{{ status }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <p>{{ item.description }}</p>
+      </div>
+    </article>
+  } @else {
+    <header class="app-page-header">
+      <div>
+        <p class="app-eyebrow">Ticket details</p>
+        <h1 class="app-title">Ticket not found</h1>
+        <p class="app-subtitle">No issue record exists for {{ id }}.</p>
+      </div>
+      <a mat-stroked-button routerLink="/admin/issues">Back to List</a>
+    </header>
+    <article class="app-panel"><div class="app-panel-body app-muted">Create a new ticket or choose another issue from the list.</div></article>
+  }
+</section>

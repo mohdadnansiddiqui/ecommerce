@@ -1,0 +1,31 @@
+.layout-shell {
+  min-height: 100vh;
+  background: var(--app-bg);
+}
+
+.layout-sidebar {
+  width: 292px;
+  border: 0;
+}
+
+.layout-content {
+  min-height: 100vh;
+}
+
+.content-frame {
+  display: grid;
+  gap: 18px;
+  width: min(100% - 32px, 1480px);
+  margin: 0 auto;
+  padding: 18px 0 24px;
+}
+
+@media (max-width: 980px) {
+  .layout-sidebar {
+    width: 252px;
+  }
+
+  .content-frame {
+    width: min(100% - 20px, 1480px);
+  }
+}

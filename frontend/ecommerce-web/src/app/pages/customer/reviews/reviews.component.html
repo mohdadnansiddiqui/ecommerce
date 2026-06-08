@@ -1,0 +1,30 @@
+<section class="app-page">
+  <header>
+    <p class="app-eyebrow">Reviews</p>
+    <h1 class="app-title">Customer reviews</h1>
+    <p class="app-subtitle">Create and view reviews through review-service.</p>
+  </header>
+  <form class="app-panel" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="app-panel-body app-form-grid">
+      <mat-form-field appearance="outline"><mat-label>Customer ID</mat-label><input matInput type="number" formControlName="customerId" /></mat-form-field>
+      <mat-form-field appearance="outline"><mat-label>Product ID</mat-label><input matInput type="number" formControlName="productId" /></mat-form-field>
+      <mat-form-field appearance="outline"><mat-label>Rating</mat-label><input matInput type="number" min="1" max="5" formControlName="rating" /></mat-form-field>
+      <mat-form-field appearance="outline" class="app-full"><mat-label>Review</mat-label><textarea matInput rows="4" formControlName="reviewText"></textarea></mat-form-field>
+      <button mat-stroked-button type="button" (click)="load()">Load Reviews</button>
+      <button mat-flat-button color="primary" type="submit">Submit Review</button>
+    </div>
+  </form>
+  <div class="review-list">
+    @for (review of reviews(); track review.id) {
+      <article class="app-panel">
+        <div class="app-panel-body review-card">
+          <span class="status-pill">{{ review.rating }} stars</span>
+          <p>{{ review.reviewText }}</p>
+          <small>Customer {{ review.customerId }} · {{ review.createdAt | date:'medium' }}</small>
+        </div>
+      </article>
+    } @empty {
+      <article class="app-panel"><div class="app-panel-body app-muted">Load reviews for a product.</div></article>
+    }
+  </div>
+</section>

@@ -1,0 +1,50 @@
+<section class="app-page">
+  @if (loading()) {
+    <app-loading-spinner label="Loading customer" />
+  } @else if (error()) {
+    <header class="app-page-header">
+      <div>
+        <p class="app-eyebrow">Customer profile</p>
+        <h1 class="app-title">Customer {{ id }}</h1>
+        <p class="app-subtitle">{{ error() }}</p>
+      </div>
+      <button mat-stroked-button type="button" (click)="load()">
+        <mat-icon>refresh</mat-icon>
+        Retry
+      </button>
+    </header>
+    <article class="app-panel">
+      <div class="app-panel-body error-state">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ error() }}</span>
+      </div>
+    </article>
+  } @else if (customer(); as item) {
+    <header class="app-page-header">
+      <div>
+        <p class="app-eyebrow">Customer profile</p>
+        <h1 class="app-title">{{ item.firstName }} {{ item.lastName }}</h1>
+        <p class="app-subtitle">{{ item.email }} - {{ item.phoneNumber }}</p>
+      </div>
+      <div class="actions">
+        <button mat-stroked-button type="button" (click)="load()">
+          <mat-icon>refresh</mat-icon>
+          Refresh
+        </button>
+        <a mat-flat-button color="primary" [routerLink]="['/admin/customers', item.id, 'orders']">Order History</a>
+      </div>
+    </header>
+    <article class="app-panel">
+      <div class="app-panel-body details">
+        <div><span>Full name</span><strong>{{ item.firstName }} {{ item.lastName }}</strong></div>
+        <div><span>Email</span><strong>{{ item.email }}</strong></div>
+        <div><span>Phone</span><strong>{{ item.phoneNumber || 'Not provided' }}</strong></div>
+        <div><span>Address</span><strong>{{ item.address || 'Not provided' }}</strong></div>
+        <div><span>Created</span><strong>{{ item.createdAt | date:'medium' }}</strong></div>
+        <div><span>Customer ID</span><strong>{{ item.id }}</strong></div>
+      </div>
+    </article>
+  } @else {
+    <article class="app-panel"><div class="app-panel-body app-muted">Customer not found.</div></article>
+  }
+</section>

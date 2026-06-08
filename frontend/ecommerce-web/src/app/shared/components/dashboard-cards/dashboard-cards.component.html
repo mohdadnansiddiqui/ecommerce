@@ -1,0 +1,12 @@
+<section class="cards">
+  @for (card of cards; track card.label) {
+    <article class="metric-card" [class]="card.tone">
+      <span class="metric-icon"><mat-icon>{{ card.icon }}</mat-icon></span>
+      <div>
+        <p>{{ card.label }}</p>
+        <strong>{{ card.value }}</strong>
+        <small>{{ card.hint }}</small>
+      </div>
+    </article>
+  }
+</section>

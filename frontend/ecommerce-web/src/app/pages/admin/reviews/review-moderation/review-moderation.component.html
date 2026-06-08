@@ -1,0 +1,30 @@
+<section class="app-page">
+  <header>
+    <p class="app-eyebrow">Review moderation</p>
+    <h1 class="app-title">Moderation queue</h1>
+    <p class="app-subtitle">Inspect and remove reviews using the existing review delete endpoint.</p>
+  </header>
+  <form class="app-panel" [formGroup]="form" (ngSubmit)="load()">
+    <div class="app-panel-body lookup">
+      <mat-form-field appearance="outline">
+        <mat-label>Product ID</mat-label>
+        <input matInput type="number" formControlName="productId" />
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="submit">Load Queue</button>
+    </div>
+  </form>
+  <div class="moderation-list">
+    @for (review of reviews(); track review.id) {
+      <article class="app-panel">
+        <div class="app-panel-body review-card">
+          <span class="status-pill">{{ review.rating }} stars</span>
+          <p>{{ review.reviewText }}</p>
+          <small>Customer {{ review.customerId }} · {{ review.createdAt | date:'medium' }}</small>
+          <button mat-stroked-button color="warn" type="button" (click)="remove(review.id)">Remove</button>
+        </div>
+      </article>
+    } @empty {
+      <article class="app-panel"><div class="app-panel-body app-muted">Load a product to review moderation candidates.</div></article>
+    }
+  </div>
+</section>

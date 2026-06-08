@@ -1,0 +1,73 @@
+<section class="app-page">
+  @if (ticket) {
+    <header class="app-page-header">
+      <div>
+        <p class="app-eyebrow">Update ticket</p>
+        <h1 class="app-title">Edit {{ id }}</h1>
+        <p class="app-subtitle">Update issue details, priority, assignee customer, or workflow status.</p>
+      </div>
+      <a mat-stroked-button [routerLink]="['/admin/issues', id]">Back to Details</a>
+    </header>
+
+    <form class="app-panel" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="app-panel-body app-form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" />
+          @if (form.controls.title.touched && form.controls.title.invalid) {
+            <mat-error>Title is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Customer</mat-label>
+          <input matInput formControlName="customer" />
+          @if (form.controls.customer.touched && form.controls.customer.invalid) {
+            <mat-error>Customer is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Priority</mat-label>
+          <mat-select formControlName="priority">
+            @for (priority of priorities; track priority) {
+              <mat-option [value]="priority">{{ priority }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            @for (status of statuses; track status) {
+              <mat-option [value]="status">{{ status }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="app-full">
+          <mat-label>Description</mat-label>
+          <textarea matInput rows="5" formControlName="description"></textarea>
+          @if (form.controls.description.touched && form.controls.description.invalid) {
+            <mat-error>Description is required</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="app-full actions">
+          <a mat-stroked-button [routerLink]="['/admin/issues', id]">Cancel</a>
+          <button mat-flat-button color="primary" type="submit">Save Ticket</button>
+        </div>
+      </div>
+    </form>
+  } @else {
+    <header class="app-page-header">
+      <div>
+        <p class="app-eyebrow">Update ticket</p>
+        <h1 class="app-title">Ticket not found</h1>
+        <p class="app-subtitle">No issue record exists for {{ id }}.</p>
+      </div>
+      <a mat-stroked-button routerLink="/admin/issues">Back to List</a>
+    </header>
+    <article class="app-panel"><div class="app-panel-body app-muted">Choose another issue from the ticket list.</div></article>
+  }
+</section>

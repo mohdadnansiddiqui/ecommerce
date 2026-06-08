@@ -1,0 +1,12 @@
+<section class="app-page">
+  <header>
+    <p class="app-eyebrow">Profile</p>
+    <h1 class="app-title">{{ auth.currentUser()?.username || 'Customer' }}</h1>
+    <p class="app-subtitle">{{ auth.currentUser()?.email }}</p>
+  </header>
+  <section class="profile-grid">
+    <article class="app-panel"><div class="app-panel-body"><span>User ID</span><strong>{{ auth.currentUser()?.id }}</strong></div></article>
+    <article class="app-panel"><div class="app-panel-body"><span>Status</span><strong>{{ auth.currentUser()?.enabled ? 'Enabled' : 'Disabled' }}</strong></div></article>
+    <article class="app-panel"><div class="app-panel-body"><span>Roles</span><strong>{{ auth.currentUser()?.roles?.join(', ') }}</strong></div></article>
+  </section>
+</section>

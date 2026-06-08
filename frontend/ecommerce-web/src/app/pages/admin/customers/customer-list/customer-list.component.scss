@@ -1,0 +1,46 @@
+.toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 760px) {
+  .toolbar app-search-bar {
+    width: 100%;
+  }
+}
+
+.error-state {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  border-top: 1px solid var(--app-border);
+  color: var(--app-muted);
+}
+
+.error-state mat-icon {
+  color: var(--app-danger);
+}
+
+.error-state strong,
+.error-state span {
+  display: block;
+}
+
+.error-state strong {
+  color: var(--app-text);
+}
+
+@media (max-width: 680px) {
+  .error-state {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .error-state button {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}

@@ -1,0 +1,7 @@
+<section class="app-page">
+  <header>
+    <p class="app-eyebrow">Customer order history</p>
+    <h1 class="app-title">Orders for customer {{ customerId }}</h1>
+  </header>
+  <app-data-table [columns]="columns" [rows]="rows()" emptyTitle="No orders for this customer" />
+</section>

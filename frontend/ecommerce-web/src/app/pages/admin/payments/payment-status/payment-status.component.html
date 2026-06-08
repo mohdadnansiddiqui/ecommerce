@@ -1,0 +1,25 @@
+<section class="app-page">
+  <header>
+    <p class="app-eyebrow">Payment status view</p>
+    <h1 class="app-title">Payment status lookup</h1>
+    <p class="app-subtitle">Read-only status view backed by payment-service.</p>
+  </header>
+  <form class="app-panel" [formGroup]="form" (ngSubmit)="load()">
+    <div class="app-panel-body lookup">
+      <mat-form-field appearance="outline">
+        <mat-label>Payment ID</mat-label>
+        <input matInput type="number" formControlName="paymentId" />
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="submit">Load Status</button>
+    </div>
+  </form>
+  @if (payment(); as item) {
+    <article class="status-card">
+      <mat-icon>verified</mat-icon>
+      <div>
+        <strong>{{ item.paymentStatus }}</strong>
+        <span>{{ item.paymentMethod }} · {{ item.amount | currency:'INR' }}</span>
+      </div>
+    </article>
+  }
+</section>

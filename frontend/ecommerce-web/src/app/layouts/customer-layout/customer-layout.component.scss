@@ -1,0 +1,27 @@
+.layout-shell {
+  min-height: 100vh;
+  background: var(--app-bg);
+}
+
+.layout-sidebar {
+  width: 276px;
+  border: 0;
+}
+
+.content-frame {
+  display: grid;
+  gap: 18px;
+  width: min(100% - 32px, 1320px);
+  margin: 0 auto;
+  padding: 18px 0 24px;
+}
+
+@media (max-width: 920px) {
+  .layout-sidebar {
+    width: 236px;
+  }
+
+  .content-frame {
+    width: min(100% - 20px, 1320px);
+  }
+}

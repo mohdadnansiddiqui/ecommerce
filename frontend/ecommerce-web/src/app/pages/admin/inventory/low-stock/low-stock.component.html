@@ -1,0 +1,11 @@
+<section class="app-page">
+  <header class="app-page-header">
+    <div>
+      <p class="app-eyebrow">Inventory risk</p>
+      <h1 class="app-title">Low stock dashboard</h1>
+      <p class="app-subtitle">Products with stock quantity at or below 10 from product-service.</p>
+    </div>
+    <a mat-flat-button color="primary" routerLink="/admin/inventory/stock">Update Stock</a>
+  </header>
+  <app-data-table [columns]="columns" [rows]="rows()" emptyTitle="No low stock products" />
+</section>

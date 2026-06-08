@@ -1,0 +1,35 @@
+<section class="app-page">
+  <header class="customer-hero">
+    <div>
+      <p class="app-eyebrow">Customer portal</p>
+      <h1>Shop, track orders, and stay in sync with your commerce account.</h1>
+      <p>Browse products, manage cart, checkout, review orders, and manage notifications from one focused workspace.</p>
+      <a mat-flat-button color="primary" routerLink="/portal/products">Browse Products</a>
+    </div>
+  </header>
+
+  <section class="quick-grid">
+    <a class="app-panel" routerLink="/portal/cart"><div class="app-panel-body"><mat-icon>shopping_cart</mat-icon><strong>Cart</strong><span>Manage items and quantities</span></div></a>
+    <a class="app-panel" routerLink="/portal/orders"><div class="app-panel-body"><mat-icon>receipt_long</mat-icon><strong>Orders</strong><span>Review customer history</span></div></a>
+    <a class="app-panel" routerLink="/portal/notifications"><div class="app-panel-body"><mat-icon>notifications</mat-icon><strong>Notifications</strong><span>Read account updates</span></div></a>
+  </section>
+
+  <section class="app-page">
+    <div class="app-page-header">
+      <div>
+        <p class="app-eyebrow">Featured catalog</p>
+        <h2>Products to explore</h2>
+      </div>
+      <a mat-button routerLink="/portal/products">View all</a>
+    </div>
+    <div class="product-grid">
+      @for (product of products(); track product.id) {
+        <a class="product-card" [routerLink]="['/portal/products', product.id]">
+          <img [src]="product.imageUrl || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'" alt="" />
+          <strong>{{ product.name }}</strong>
+          <span>{{ product.price | currency:'INR' }}</span>
+        </a>
+      }
+    </div>
+  </section>
+</section>

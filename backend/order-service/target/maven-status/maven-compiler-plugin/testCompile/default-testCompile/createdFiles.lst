@@ -1,0 +1,4 @@
+com\ecommerce\order\application\service\OrderServiceTest.class
+com\ecommerce\order\support\OrderTestData.class
+com\ecommerce\order\domain\repository\OrderRepositoryIntegrationTest.class
+com\ecommerce\order\interfaces\rest\OrderControllerTest.class

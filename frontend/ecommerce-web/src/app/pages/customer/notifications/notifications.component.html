@@ -1,0 +1,16 @@
+<section class="app-page">
+  <header>
+    <p class="app-eyebrow">Notifications</p>
+    <h1 class="app-title">Customer notifications</h1>
+  </header>
+  <section class="app-panel">
+    <form class="app-panel-body lookup" [formGroup]="form" (ngSubmit)="load()">
+      <mat-form-field appearance="outline">
+        <mat-label>Customer ID</mat-label>
+        <input matInput type="number" formControlName="customerId" />
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="submit">Load Notifications</button>
+    </form>
+    <app-data-table [columns]="columns" [rows]="rows()" [showViewAction]="false" emptyTitle="Load a customer to view notifications" />
+  </section>
+</section>
