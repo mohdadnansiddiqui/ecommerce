@@ -1,5 +1,0 @@
-com\ecommerce\product\infrastructure\security\ProductSecurityTest.class
-com\ecommerce\product\interfaces\rest\ProductControllerTest.class
-com\ecommerce\product\application\service\ProductServiceTest.class
-com\ecommerce\product\support\ProductTestData.class
-com\ecommerce\product\domain\repository\ProductRepositoryIntegrationTest.class

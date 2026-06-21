@@ -12,6 +12,7 @@ import com.ecommerce.auth.domain.model.RoleName;
 import com.ecommerce.auth.domain.model.User;
 import com.ecommerce.auth.domain.repository.RoleRepository;
 import com.ecommerce.auth.domain.repository.UserRepository;
+import com.ecommerce.auth.event.CustomerCreateEvent;
 import com.ecommerce.auth.shared.exception.BadRequestException;
 import com.ecommerce.auth.shared.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,7 @@ public class AuthService {
     private final RefreshTokenService refreshTokenService;
     private final UserMapper userMapper;
     private final JwtProperties jwtProperties;
+    private final CustomerCreateEvent createEvent;
 
     public UserResponse register(RegisterRequest request) {
         if (userRepository.existsByUsername(request.username())) {
@@ -55,6 +57,7 @@ public class AuthService {
         user.getRoles().add(customerRole);
         User saved = userRepository.save(user);
         log.info("Registered user {}", saved.getUsername());
+        createEvent.customerCreate("Registered user"+saved.getUsername());
         return userMapper.toResponse(saved);
     }
 

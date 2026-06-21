@@ -1,5 +1,0 @@
-com\ecommerce\auth\application\service\AuthServiceTest.class
-com\ecommerce\auth\support\AuthTestData.class
-com\ecommerce\auth\interfaces\rest\AuthControllerTest.class
-com\ecommerce\auth\domain\repository\UserRepositoryIntegrationTest.class
-com\ecommerce\auth\infrastructure\security\AuthSecurityTest.class
