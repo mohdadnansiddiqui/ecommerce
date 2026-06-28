@@ -4,85 +4,197 @@ services:
     container_name: service-registry
     ports:
       - "8761:8761"
+      - "5015:5005"
+    environment:
+      CONFIG_URL: http://config-server:8888
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
     networks:
       - ecomm-net
+
   config-server:
     build: ./config-server
     container_name: config-server
     ports:
       - "8888:8888"
+      - "5014:5005"
+    environment:
+      EUREKA_URL: http://service-registry:8761/eureka
+      CONFIG_URL: http://config-server:8888
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - service-registry
     networks:
       - ecomm-net
+
   auth-service:
     build: ./auth-service
     container_name: auth-service
     ports:
       - "8081:8081"
+      - "5008:5005"
+    environment:
+      EUREKA_URL: http://service-registry:8761/eureka
+      CONFIG_URL: http://config-server:8888
+      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_auth
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - service-registry
+      - config-server
     networks:
       - ecomm-net
-  cart-service:
-    build: ./cart-service
-    container_name: cart-service
-    ports:
-      - "8084:8084"
-    networks:
-      - ecomm-net
+
   customer-service:
     build: ./customer-service
     container_name: customer-service
     ports:
       - "8082:8082"
+      - "5007:5005"
+    environment:
+      EUREKA_URL: http://service-registry:8761/eureka
+      CONFIG_URL: http://config-server:8888
+      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_customer
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - service-registry
+      - config-server
     networks:
       - ecomm-net
-  inventory-service:
-    build: ./inventory-service
-    container_name: inventory-service
-    ports:
-      - "8087:8087"
-    networks:
-      - ecomm-net
-  notification-service:
-    build: ./notification-service
-    container_name: notification-service
-    ports:
-      - "8088:8088"
-    networks:
-      - ecomm-net
-  order-service:
-    build: ./order-service
-    container_name: order-service
-    ports:
-      - "8085:8085"
-    networks:
-      - ecomm-net
-  payment-service:
-    build: ./payment-service
-    container_name: payment-service
-    ports:
-      - "8086:8086"
-    networks:
-      - ecomm-net
+
   product-service:
     build: ./product-service
     container_name: product-service
     ports:
       - "8083:8083"
+      - "5006:5005"
+    environment:
+      EUREKA_URL: http://service-registry:8761/eureka
+      CONFIG_URL: http://config-server:8888
+      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_product
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - service-registry
+      - config-server
     networks:
       - ecomm-net
+
+  cart-service:
+    build: ./cart-service
+    container_name: cart-service
+    ports:
+      - "8084:8084"
+      - "5005:5005"
+    environment:
+      EUREKA_URL: http://service-registry:8761/eureka
+      CONFIG_URL: http://config-server:8888
+      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_cart
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - service-registry
+      - config-server
+    networks:
+      - ecomm-net
+
+  order-service:
+    build: ./order-service
+    container_name: order-service
+    ports:
+      - "8085:8085"
+      - "5009:5005"
+    environment:
+      EUREKA_URL: http://service-registry:8761/eureka
+      CONFIG_URL: http://config-server:8888
+      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_order
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - service-registry
+      - config-server
+    networks:
+      - ecomm-net
+
+  payment-service:
+    build: ./payment-service
+    container_name: payment-service
+    ports:
+      - "8086:8086"
+      - "5010:5005"
+    environment:
+      EUREKA_URL: http://service-registry:8761/eureka
+      CONFIG_URL: http://config-server:8888
+      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_payment
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - service-registry
+      - config-server
+    networks:
+      - ecomm-net
+
+  inventory-service:
+    build: ./inventory-service
+    container_name: inventory-service
+    ports:
+      - "8087:8087"
+      - "5011:5005"
+    environment:
+      EUREKA_URL: http://service-registry:8761/eureka
+      CONFIG_URL: http://config-server:8888
+      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_inventory
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - service-registry
+      - config-server
+    networks:
+      - ecomm-net
+
+  notification-service:
+    build: ./notification-service
+    container_name: notification-service
+    ports:
+      - "8088:8088"
+      - "5012:5005"
+    environment:
+      EUREKA_URL: http://service-registry:8761/eureka
+      CONFIG_URL: http://config-server:8888
+      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_notification
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - service-registry
+      - config-server
+    networks:
+      - ecomm-net
+
   review-service:
     build: ./review-service
     container_name: review-service
     ports:
       - "8089:8089"
+      - "5013:5005"
+    environment:
+      EUREKA_URL: http://service-registry:8761/eureka
+      CONFIG_URL: http://config-server:8888
+      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_review
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - service-registry
+      - config-server
     networks:
       - ecomm-net
+
   api-gateway:
     build: ./api-gateway
     container_name: api-gateway
     ports:
       - "9000:9000"
+      - "5016:5005"
+    environment:
+      EUREKA_URL: http://service-registry:8761/eureka
+      CONFIG_URL: http://config-server:8888
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - service-registry
+      - config-server
     networks:
       - ecomm-net
+
 networks:
   ecomm-net:
     driver: bridge

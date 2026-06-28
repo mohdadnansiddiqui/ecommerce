@@ -46,7 +46,7 @@ public class AuthService {
         if (userRepository.existsByEmail(request.email())) {
             throw new BadRequestException("Email already exists");
         }
-        var customerRole = roleRepository.findByRoleName(RoleName.ADMIN)
+        var customerRole = roleRepository.findByRoleName(RoleName.CUSTOMER)
                 .orElseThrow(() -> new ResourceNotFoundException("CUSTOMER role is not configured"));
         User user = User.builder()
                 .username(request.username())

@@ -4,10 +4,12 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.ecommerce.cart.config.FeignConfig;
+
 import java.math.BigDecimal;
 import java.time.Instant;
 
-@FeignClient(name = "product-service", url = "${services.product.url}")
+@FeignClient(name = "product-service", configuration = FeignConfig.class)
 public interface ProductClient {
     @GetMapping("/api/v1/products/{id}")
     ProductResponse getProduct(@PathVariable Long id);
