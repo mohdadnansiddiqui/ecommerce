@@ -10,3 +10,12 @@ eureka:
     register-with-eureka: false
 server:
   port: 8761
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health,info
+
+
+
