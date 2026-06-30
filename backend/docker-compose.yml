@@ -49,7 +49,7 @@ services:
     environment:
       EUREKA_URL: http://service-registry:8761/eureka
       CONFIG_URL: http://config-server:8888
-      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_auth
+      DB_URL: jdbc:postgresql://postgres:5433/ecommerce_auth
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
     depends_on:
       service-registry:
@@ -68,7 +68,7 @@ services:
     environment:
       EUREKA_URL: http://service-registry:8761/eureka
       CONFIG_URL: http://config-server:8888
-      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_customer
+      DB_URL: jdbc:postgresql://postgres:5433/ecommerce_customer
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
     depends_on:
       service-registry:
@@ -87,7 +87,7 @@ services:
     environment:
       EUREKA_URL: http://service-registry:8761/eureka
       CONFIG_URL: http://config-server:8888
-      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_product
+      DB_URL: jdbc:postgresql://postgres:5433/ecommerce_product
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
     depends_on:
       service-registry:
@@ -106,7 +106,7 @@ services:
     environment:
       EUREKA_URL: http://service-registry:8761/eureka
       CONFIG_URL: http://config-server:8888
-      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_cart
+      DB_URL: jdbc:postgresql://postgres:5433/ecommerce_cart
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
     depends_on:
       service-registry:
@@ -125,7 +125,7 @@ services:
     environment:
       EUREKA_URL: http://service-registry:8761/eureka
       CONFIG_URL: http://config-server:8888
-      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_order
+      DB_URL: jdbc:postgresql://postgres:5433/ecommerce_order
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
     depends_on:
       service-registry:
@@ -144,7 +144,7 @@ services:
     environment:
       EUREKA_URL: http://service-registry:8761/eureka
       CONFIG_URL: http://config-server:8888
-      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_payment
+      DB_URL: jdbc:postgresql://postgres:5433/ecommerce_payment
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
     depends_on:
       service-registry:
@@ -163,7 +163,7 @@ services:
     environment:
       EUREKA_URL: http://service-registry:8761/eureka
       CONFIG_URL: http://config-server:8888
-      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_inventory
+      DB_URL: jdbc:postgresql://postgres:5433/ecommerce_inventory
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
     depends_on:
       service-registry:
@@ -182,7 +182,7 @@ services:
     environment:
       EUREKA_URL: http://service-registry:8761/eureka
       CONFIG_URL: http://config-server:8888
-      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_notification
+      DB_URL: jdbc:postgresql://postgres:5433/ecommerce_notification
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
     depends_on:
       service-registry:
@@ -201,7 +201,7 @@ services:
     environment:
       EUREKA_URL: http://service-registry:8761/eureka
       CONFIG_URL: http://config-server:8888
-      DB_URL: jdbc:postgresql://host.docker.internal:5432/ecommerce_review
+      DB_URL: jdbc:postgresql://postgres:5433/ecommerce_review
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
     depends_on:
       service-registry:
@@ -249,11 +249,46 @@ services:
         KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       volumes:
         - kafka-data:/var/lib/kafka/data
+  postgres:
+    image: postgres:17
+    container_name: postgres
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - ecomm-net
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: unless-stopped
+    ports:
+      - "5051:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - ecomm-net
     
 volumes:
   kafka-data:
-
-
+  postgres-data:
+  pgadmin-data:
 networks:
   ecomm-net:
     driver: bridge
